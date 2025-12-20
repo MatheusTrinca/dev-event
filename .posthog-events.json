@@ -1,0 +1,32 @@
+[
+  {
+    "event": "explore_events_clicked",
+    "description": "User clicked the Explore Events button on the homepage, indicating interest in browsing events",
+    "file": "components/ExploreButton.tsx"
+  },
+  {
+    "event": "event_card_clicked",
+    "description": "User clicked on an event card to view event details - key conversion action",
+    "file": "components/EventCard.tsx"
+  },
+  {
+    "event": "nav_home_clicked",
+    "description": "User navigated to home page via navbar",
+    "file": "components/Navbar.tsx"
+  },
+  {
+    "event": "nav_events_clicked",
+    "description": "User navigated to events listing page via navbar",
+    "file": "components/Navbar.tsx"
+  },
+  {
+    "event": "nav_create_event_clicked",
+    "description": "User clicked to create a new event - high-value conversion action",
+    "file": "components/Navbar.tsx"
+  },
+  {
+    "event": "logo_clicked",
+    "description": "User clicked the logo to navigate home",
+    "file": "components/Navbar.tsx"
+  }
+]
