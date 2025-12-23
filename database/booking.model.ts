@@ -62,23 +62,27 @@ BookingSchema.pre('save', async function (next) {
     }
   }
 
+  // Check for duplicate booking (one booking per event per email)
+  if (booking.isNew || booking.isModified('eventId') || booking.isModified('email')) {
+    const Booking = models?.Booking || model<IBooking>('Booking', BookingSchema);
+    const existingBooking = await Booking.findOne({
+      eventId: booking.eventId,
+      email: booking.email,
+      _id: { $ne: booking._id },
+    });
+
+    if (existingBooking) {
+      const error = new Error(
+        'You have already booked this event with this email address'
+      );
+      error.name = 'ValidationError';
+      return next(error);
+    }
+  }
+
   next();
 });
 
-// Create index on eventId for faster queries
-BookingSchema.index({ eventId: 1 });
-
-// Create compound index for common queries (events bookings by date)
-BookingSchema.index({ eventId: 1, createdAt: -1 });
-
-// Create index on email for user booking lookups
-BookingSchema.index({ email: 1 });
-
-// Enforce one booking per events per email
-BookingSchema.index(
-  { eventId: 1, email: 1 },
-  { unique: true, name: 'uniq_event_email' }
-);
-const Booking = models.Booking || model<IBooking>('Booking', BookingSchema);
+const Booking = models?.Booking || model<IBooking>('Booking', BookingSchema);
 
 export default Booking;

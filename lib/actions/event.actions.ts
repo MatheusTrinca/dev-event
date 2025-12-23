@@ -1,9 +1,9 @@
 "use server";
 
-import { Event, IEvent } from "@/database";
+import { Event } from "@/database";
 import connectDB from "../mongodb";
 
-export const getSimilarEventsBySlug = async (slug: string): Promise<IEvent[]> => {
+export const getSimilarEventsBySlug = async (slug: string) => {
   try {
     await connectDB();
 
