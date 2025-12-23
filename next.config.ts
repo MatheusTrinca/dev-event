@@ -1,12 +1,13 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  cacheComponents: true,
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
+        protocol: "https",
+        hostname: "res.cloudinary.com",
       },
     ],
   },
@@ -14,12 +15,12 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/ingest/static/:path*',
-        destination: 'https://us-assets.i.posthog.com/static/:path*',
+        source: "/ingest/static/:path*",
+        destination: "https://us-assets.i.posthog.com/static/:path*",
       },
       {
-        source: '/ingest/:path*',
-        destination: 'https://us.i.posthog.com/:path*',
+        source: "/ingest/:path*",
+        destination: "https://us.i.posthog.com/:path*",
       },
     ];
   },
